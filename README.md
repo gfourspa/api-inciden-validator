@@ -13,7 +13,7 @@
 
 ## Support
 
-* para soporte contactar a gutierrezgfour.spa@gmail.com
+* para soporte contactar a gutierrezgfour.spa@gmail.com o
 
 
 
