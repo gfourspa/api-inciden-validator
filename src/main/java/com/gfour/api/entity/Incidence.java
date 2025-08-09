@@ -22,8 +22,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "INCIDENCIA")
-@Table(name = "INCIDENCE")
+@Table(name = "INCIDENCIA")
+//@Table(name = "INCIDENCE")
 public class Incidence {
     
     @Id

@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "CONEXION_NODO_INCIDENCIA")
-@Table(name = "INCIDENT_NODE_CONNECTION")
+@Table(name = "CONEXION_NODO_INCIDENCIA")
+//@Table(name = "INCIDENT_NODE_CONNECTION")
 public class NodeConnection extends Audit {
     
     @Id

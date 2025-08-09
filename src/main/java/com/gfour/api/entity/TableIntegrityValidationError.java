@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ERR_VALIDACION_iNTEGRIDAD_TABLA")
-@Table(name = "TABLE_INTEGRITY_VALIDATION_ERROR")
+@Table(name = "ERR_VALIDACION_INTEGRIDAD_TABLA")
+//@Table(name = "TABLE_INTEGRITY_VALIDATION_ERROR")
 public class TableIntegrityValidationError extends Audit {
     
     @Id

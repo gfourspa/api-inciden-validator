@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ERR_TABLAS_INTERRUPCION")
-@Table(name = "INTERRUPTION_TABLE_ERROR")
+@Table(name = "ERR_TABLAS_INTERRUPCION")
+//@Table(name = "INTERRUPTION_TABLE_ERROR")
 public class InterruptionTableError extends Audit {
     
     @Id

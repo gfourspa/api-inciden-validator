@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "DESCRIPCION_EVENTO")
-@Table(name = "EVENT_DESCRIPTION")
+@Table(name = "DESCRIPCION_EVENTO")
+//@Table(name = "EVENT_DESCRIPTION")
 public class EventDescription extends Audit {
     
     @Id

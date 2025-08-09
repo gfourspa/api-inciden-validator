@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "EQUIPO_TOPOLOGIA")
-@Table(name = "TOPOLOGY_EQUIPMENT")
+@Table(name = "EQUIPO_TOPOLOGIA")
+//@Table(name = "TOPOLOGY_EQUIPMENT")
 public class TopologyEquipment extends Audit {
     
     @Id

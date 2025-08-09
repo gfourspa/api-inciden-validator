@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ERR_iNTEGRIDAD_tablas_Nodo_Inci")
-@Table(name = "INCIDENT_NODE_TABLE_INTEGRITY_ERROR")
+@Table(name = "ERR_INTEGRIDAD_TABLAS_NODO_INCIDENCIA")
+//@Table(name = "INCIDENT_NODE_TABLE_INTEGRITY_ERROR")
 public class IncidentNodeTableIntegrityError extends Audit {
     
     @Id

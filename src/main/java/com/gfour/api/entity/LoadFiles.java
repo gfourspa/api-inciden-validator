@@ -21,8 +21,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "CARGA_ARCHIVOS")
-@Table(name = "LOAD_FILES")
+@Table(name = "CARGA_ARCHIVOS")
+//@Table(name = "LOAD_FILES")
 public class LoadFiles extends Audit {
 
     @Id

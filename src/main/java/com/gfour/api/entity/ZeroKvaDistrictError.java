@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ERR_KVA_Comuna_cero")
-@Table(name = "ZERO_KVA_DISTRICT_ERROR")
+@Table(name = "ERR_KVA_COMUNA_CERO")
+//@Table(name = "ZERO_KVA_DISTRICT_ERROR")
 public class ZeroKvaDistrictError extends Audit {
     
     @Id

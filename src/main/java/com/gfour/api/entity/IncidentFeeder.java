@@ -26,8 +26,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ALIMENTADOR_INCIDENCIA")
-@Table(name = "INCIDENT_FEEDER")
+@Table(name = "ALIMENTADOR_INCIDENCIA")
+//@Table(name = "INCIDENT_FEEDER")
 public class IncidentFeeder extends Audit {
     
     @Id

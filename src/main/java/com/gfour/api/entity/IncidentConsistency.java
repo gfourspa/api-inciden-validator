@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "CONSISTENCIA_INCIDENCIA")
-@Table(name = "INCIDENT_CONSISTENCY")
+@Table(name = "CONSISTENCIA_INCIDENCIA")
+//@Table(name = "INCIDENT_CONSISTENCY")
 public class IncidentConsistency extends Audit {
     
     @Id

@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "ESTADO_COMUNA_EMPRESA_SD")
-@Table(name = "SD_COMPANY_DISTRICT_STATUS")
+@Table(name = "ESTADO_COMUNA_EMPRESA_SD")
+//@Table(name = "SD_COMPANY_DISTRICT_STATUS")
 public class SdCompanyDistrictStatus extends Audit {
     
     @Id

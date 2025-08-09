@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "BLOQUE_REPOSICION")
-@Table(name = "REPLACEMENT_BLOCK")
+@Table(name = "BLOQUE_REPOSICION")
+//@Table(name = "REPLACEMENT_BLOCK")
 public class ReplacementBlock extends Audit {
     
     @Id

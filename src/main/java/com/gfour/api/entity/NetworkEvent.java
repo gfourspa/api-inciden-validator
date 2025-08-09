@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "EVENTO_RED")
-@Table(name = "NETWORK_EVENT")
+@Table(name = "EVENTO_RED")
+//@Table(name = "NETWORK_EVENT")
 public class NetworkEvent extends Audit {
     
     @Id

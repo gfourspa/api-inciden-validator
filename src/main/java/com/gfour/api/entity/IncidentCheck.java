@@ -28,8 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "Chequeo_incidencia")
-@Table(name = "INCIDENT_CHECK")
+@Table(name = "CHEQUEO_INCIDENTE")
+//@Table(name = "INCIDENT_CHECK")
 public class IncidentCheck extends Audit {
     
     @Id

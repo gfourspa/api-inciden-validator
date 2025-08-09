@@ -25,8 +25,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-// @Table(name = "FUENTE_ENERGIA_RED")
-@Table(name = "NETWORK_ENERGY_SOURCE")
+@Table(name = "FUENTE_ENERGIA_RED")
+//@Table(name = "NETWORK_ENERGY_SOURCE")
 public class NetworkEnergySource extends Audit {
     
     @Id
