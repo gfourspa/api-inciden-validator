@@ -1,6 +1,5 @@
 package com.gfour.api.entity;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -56,12 +55,12 @@ public class AffectedFeeder extends Audit {
     private String interruptionId;
     
     @NotNull
-    @Column(name = "interrupted_kva_u", precision = 10, scale = 2, nullable = false)
-    private BigDecimal interruptedKvaU;
+    @Column(name = "interrupted_kva_u", nullable = false)
+    private Double interruptedKvaU;
     
     @NotNull
-    @Column(name = "interrupted_kva_r1", precision = 10, scale = 2, nullable = false)
-    private BigDecimal interruptedKvaR1;
+    @Column(name = "interrupted_kva_r1", nullable = false)
+    private Double interruptedKvaR1;
     
     @NotNull
     @Column(name = "total_transfo_int_u", nullable = false)
@@ -76,8 +75,8 @@ public class AffectedFeeder extends Audit {
     private Integer totalTransfoIntR1;
     
     @NotNull
-    @Column(name = "interrupted_kva_r2", precision = 10, scale = 2, nullable = false)
-    private BigDecimal interruptedKvaR2;
+    @Column(name = "interrupted_kva_r2", nullable = false)
+    private Double interruptedKvaR2;
     
     @NotNull
     @Column(name = "total_transfo_int_r2", nullable = false)

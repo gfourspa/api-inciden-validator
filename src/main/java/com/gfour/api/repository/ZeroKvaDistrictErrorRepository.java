@@ -16,11 +16,11 @@ public interface ZeroKvaDistrictErrorRepository extends JpaRepository<ZeroKvaDis
     
     List<ZeroKvaDistrictError> findByCompanyIdAndPeriodStar(String companyId, String periodStar);
     
-    List<ZeroKvaDistrictError> findByCommuneId(String districtId);
+    List<ZeroKvaDistrictError> findByDistrictId(String districtId);
     
     List<ZeroKvaDistrictError> findByErrorDateBetween(Date startDate, Date endDate);
     
-    List<ZeroKvaDistrictError> findByCompanyIdAndCommuneId(String companyId, String communeId);
+    List<ZeroKvaDistrictError> findByCompanyIdAndDistrictId(String companyId, String districtId);
 
     @Procedure(name = "spa_scs_KVA_Comuna_Cero_EGA")
     void validateKvaDistrictZero();

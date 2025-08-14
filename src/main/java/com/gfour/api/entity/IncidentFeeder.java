@@ -1,6 +1,5 @@
 package com.gfour.api.entity;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -56,12 +55,12 @@ public class IncidentFeeder extends Audit {
     private String feederName;
     
     @NotNull
-    @Column(name = "nominal_voltage", precision = 4, scale = 1, nullable = false)
-    private BigDecimal nominalVoltage;
+    @Column(name = "nominal_voltage", nullable = false)
+    private Double nominalVoltage;
     
     @NotNull
-    @Column(name = "max_current", precision = 10, scale = 2, nullable = false)
-    private BigDecimal maxCurrent;
+    @Column(name = "max_current", nullable = false)
+    private Double maxCurrent;
     
     @Column(name = "max_current_datetime", length = 25)
     private String maxCurrentDateTime;
@@ -79,12 +78,12 @@ public class IncidentFeeder extends Audit {
     private Boolean lowFrequencyRelay;
     
     @NotNull
-    @Column(name = "relay_frequency", precision = 5, scale = 2, nullable = false)
-    private BigDecimal relayFrequency;
+    @Column(name = "relay_frequency", nullable = false)
+    private Double relayFrequency;
     
     @NotNull
-    @Column(name = "three_phase_short_circuit_current", precision = 10, scale = 2, nullable = false)
-    private BigDecimal threePhaseShortCircuitCurrent;
+    @Column(name = "three_phase_short_circuit_current", nullable = false)
+    private Double threePhaseShortCircuitCurrent;
     
     @NotNull
     @Column(name = "bt1_clients", nullable = false)
@@ -113,14 +112,14 @@ public class IncidentFeeder extends Audit {
     private Integer supplierCompanyId;
     
     @NotNull
-    @Column(name = "installed_kva_u", precision = 10, scale = 2, nullable = false)
-    private BigDecimal installedKvaU;
-    
+    @Column(name = "installed_kva_u", nullable = false)
+    private Double installedKvaU;
+
     @NotNull
-    @Column(name = "installed_kva_r1", precision = 10, scale = 2, nullable = false)
-    private BigDecimal installedKvaR1;
-    
+    @Column(name = "installed_kva_r1", nullable = false)
+    private Double installedKvaR1;
+
     @NotNull
-    @Column(name = "installed_kva_r2", precision = 10, scale = 2, nullable = false)
-    private BigDecimal installedKvaR2;
+    @Column(name = "installed_kva_r2", nullable = false)
+    private Double installedKvaR2;
 }

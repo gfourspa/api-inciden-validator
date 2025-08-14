@@ -1,6 +1,5 @@
 package com.gfour.api.entity;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -60,14 +59,14 @@ public class ReplacementFeeder extends Audit {
     private Integer replacementBlockId;
     
     @NotNull
-    @Column(name = "replaced_kva_r1", precision = 10, scale = 2, nullable = false)
-    private BigDecimal replacedKvaR1;
+    @Column(name = "replaced_kva_r1", nullable = false)
+    private Double replacedKvaR1;
     
     @NotNull
-    @Column(name = "replaced_kva_u", precision = 10, scale = 2, nullable = false)
-    private BigDecimal replacedKvaU;
+    @Column(name = "replaced_kva_u", nullable = false)
+    private Double replacedKvaU;
     
     @NotNull
-    @Column(name = "replaced_kva_r2", precision = 10, scale = 2, nullable = false)
-    private BigDecimal replacedKvaR2;
+    @Column(name = "replaced_kva_r2", nullable = false)
+    private Double replacedKvaR2;
 }

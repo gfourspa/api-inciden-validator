@@ -67,6 +67,11 @@ public class MapperUtils {
         String value = getString(values, columnMap, columnName);
         return value == null ? null : new BigDecimal(value.replace(",", "."));
     }
+
+    public static Double getDouble(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getString(values, columnMap, columnName);
+        return value == null ? null : Double.parseDouble(value.replace(",", "."));
+    }
     
     /**
      * Get a LocalDateTime value from the values array

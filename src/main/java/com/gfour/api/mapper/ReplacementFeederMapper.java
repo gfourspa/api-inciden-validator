@@ -19,9 +19,9 @@ public class ReplacementFeederMapper implements EntityMapper<ReplacementFeeder> 
                 .feederId(MapperUtils.getInteger(values, columnMap, "feeder_id"))
                 .interruptionId(MapperUtils.getString(values, columnMap, "interruption_id"))
                 .replacementBlockId(MapperUtils.getInteger(values, columnMap, "replacement_block_id"))
-                .replacedKvaR1(MapperUtils.getBigDecimal(values, columnMap, "replaced_kva_r1"))
-                .replacedKvaU(MapperUtils.getBigDecimal(values, columnMap, "replaced_kva_u"))
-                .replacedKvaR2(MapperUtils.getBigDecimal(values, columnMap, "replaced_kva_r2"))
+                .replacedKvaR1(MapperUtils.getDouble(values, columnMap, "replaced_kva_r1"))
+                .replacedKvaU(MapperUtils.getDouble(values, columnMap, "replaced_kva_u"))
+                .replacedKvaR2(MapperUtils.getDouble(values, columnMap, "replaced_kva_r2"))
                 .build();
     }
 }

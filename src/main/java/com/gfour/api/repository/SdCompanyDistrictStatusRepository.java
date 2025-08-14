@@ -15,12 +15,12 @@ public interface SdCompanyDistrictStatusRepository extends JpaRepository<SdCompa
     
     List<SdCompanyDistrictStatus> findByCompanyId(String companyId);
     
-    List<SdCompanyDistrictStatus> findByCommuneId(String districtId);
+    List<SdCompanyDistrictStatus> findByDistrictId(String districtId);
     
     List<SdCompanyDistrictStatus> findBySdType(String sdType);
     
     List<SdCompanyDistrictStatus> findByStatus(String status);
     
-    Optional<SdCompanyDistrictStatus> findByCompanyIdAndCommuneIdAndSdType(
-            String companyId, String communeId, String sdType);
+    Optional<SdCompanyDistrictStatus> findByCompanyIdAndDistrictIdAndSdType(
+            String companyId, String districtId, String sdType);
 }

@@ -24,7 +24,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "INCIDENCIA")
 //@Table(name = "INCIDENCE")
-public class Incidence {
+public class Incidence extends Audit{
     
     @Id
     @GeneratedValue(generator = "uuid2")

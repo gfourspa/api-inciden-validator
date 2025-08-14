@@ -18,12 +18,12 @@ public class AffectedFeederMapper implements EntityMapper<AffectedFeeder> {
                 .incidentId(MapperUtils.getInteger(values, columnMap, "incident_id"))
                 .feederId(MapperUtils.getInteger(values, columnMap, "feeder_id"))
                 .interruptionId(MapperUtils.getString(values, columnMap, "interruption_id"))
-                .interruptedKvaU(MapperUtils.getBigDecimal(values, columnMap, "interrupted_kva_u"))
-                .interruptedKvaR1(MapperUtils.getBigDecimal(values, columnMap, "interrupted_kva_r1"))
+                .interruptedKvaU(MapperUtils.getDouble(values, columnMap, "interrupted_kva_u"))
+                .interruptedKvaR1(MapperUtils.getDouble(values, columnMap, "interrupted_kva_r1"))
                 .totalTransfoIntU(MapperUtils.getInteger(values, columnMap, "total_transfo_int_u"))
                 .totalInterruptedClients(MapperUtils.getInteger(values, columnMap, "total_interrupted_clients"))
                 .totalTransfoIntR1(MapperUtils.getInteger(values, columnMap, "total_transfo_int_r1"))
-                .interruptedKvaR2(MapperUtils.getBigDecimal(values, columnMap, "interrupted_kva_r2"))
+                .interruptedKvaR2(MapperUtils.getDouble(values, columnMap, "interrupted_kva_r2"))
                 .totalTransfoIntR2(MapperUtils.getInteger(values, columnMap, "total_transfo_int_r2"))
                 .build();
     }

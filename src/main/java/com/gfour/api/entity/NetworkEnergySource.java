@@ -57,9 +57,9 @@ public class NetworkEnergySource extends Audit {
     @Column(name = "description", length = 200)
     private String description;
     
-    @Column(name = "coordinates_x", precision = 10, scale = 6)
+    @Column(name = "coordinates_x")
     private Double coordinatesX;
     
-    @Column(name = "coordinates_y", precision = 10, scale = 6)
+    @Column(name = "coordinates_y")
     private Double coordinatesY;
 }

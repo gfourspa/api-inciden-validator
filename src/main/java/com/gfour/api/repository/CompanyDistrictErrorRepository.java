@@ -16,11 +16,11 @@ public interface CompanyDistrictErrorRepository extends JpaRepository<CompanyDis
     
     List<CompanyDistrictError> findByCompanyIdAndPeriodStar(String companyId, String periodStar);
     
-    List<CompanyDistrictError> findByCommuneId(String communeId);
+    List<CompanyDistrictError> findByDistrictId(String districtId);
     
     List<CompanyDistrictError> findByErrorDateBetween(Date startDate, Date endDate);
     
-    List<CompanyDistrictError> findByCompanyIdAndCommuneId(String companyId, String communeId);
+    List<CompanyDistrictError> findByCompanyIdAndDistrictId(String companyId, String districtId);
 
     @Procedure(name = "spa_scs_Comuna_Emprea_EGA")
     void validateDistrictCompany();

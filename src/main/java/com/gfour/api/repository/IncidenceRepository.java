@@ -1,6 +1,5 @@
 package com.gfour.api.repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,9 +12,6 @@ import com.gfour.api.entity.Incidence;
 
 @Repository
 public interface IncidenceRepository extends JpaRepository<Incidence, UUID> {
-
-    List<Incidence> findByStatus(String status);
-    List<Incidence> findByCreatedDateBetween(Date startDate, Date endDate);
 
     @Query(value = "SELECT COUNT(*) FROM INCIDENCIA", nativeQuery = true)
     Long countAllIncidences();
