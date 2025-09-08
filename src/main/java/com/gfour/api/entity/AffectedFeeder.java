@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Entity representing an affected feeder in an incident
+ * Entidad que representa un alimentador afectado por una incidencia
  */
 @Getter
 @Setter
@@ -26,7 +26,6 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "ALIMENTADOR_AFECTADO")
-//@Table(name = "AFFECTED_FEEDER")
 public class AffectedFeeder extends Audit {
     
     @Id
@@ -35,50 +34,31 @@ public class AffectedFeeder extends Audit {
     private UUID id;
     
     @NotNull
-    @Column(name = "company_id", length = 3)
-    private String companyId;
+    @Column(name = "empresa_id", length = 3)
+    private String empresaId;
     
     @NotNull
-    @Column(name = "period_star", length = 6)
-    private String periodStar;
+    @Column(name = "periodo_star", length = 6)
+    private String periodoStar;
     
     @NotNull
-    @Column(name = "incident_id")
-    private Integer incidentId;
+    @Column(name = "incidencia_id")
+    private Integer incidenciaId;
     
     @NotNull
-    @Column(name = "feeder_id")
-    private Integer feederId;
+    @Column(name = "interrupcion_id", length = 18)
+    private String interrupcionId;
     
     @NotNull
-    @Column(name = "interruption_id", length = 18)
-    private String interruptionId;
+    @Column(name = "alimentador_id", length = 12)
+    private String alimentadorId;
     
-    @NotNull
-    @Column(name = "interrupted_kva_u", nullable = false)
-    private Double interruptedKvaU;
+    @Column(name = "fecha_inicio_afectacion")
+    private String fechaInicioAfectacion;
     
-    @NotNull
-    @Column(name = "interrupted_kva_r1", nullable = false)
-    private Double interruptedKvaR1;
+    @Column(name = "fecha_fin_afectacion")
+    private String fechaFinAfectacion;
     
-    @NotNull
-    @Column(name = "total_transfo_int_u", nullable = false)
-    private Integer totalTransfoIntU;
-    
-    @NotNull
-    @Column(name = "total_interrupted_clients", nullable = false)
-    private Integer totalInterruptedClients;
-    
-    @NotNull
-    @Column(name = "total_transfo_int_r1", nullable = false)
-    private Integer totalTransfoIntR1;
-    
-    @NotNull
-    @Column(name = "interrupted_kva_r2", nullable = false)
-    private Double interruptedKvaR2;
-    
-    @NotNull
-    @Column(name = "total_transfo_int_r2", nullable = false)
-    private Integer totalTransfoIntR2;
+    @Column(name = "porcentaje_afectacion")
+    private Double porcentajeAfectacion;
 }

@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Entity representing a network energy source
+ * Entidad que representa una fuente de energía de red
  */
 @Getter
 @Setter
@@ -26,7 +26,6 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "FUENTE_ENERGIA_RED")
-//@Table(name = "NETWORK_ENERGY_SOURCE")
 public class NetworkEnergySource extends Audit {
     
     @Id
@@ -35,31 +34,30 @@ public class NetworkEnergySource extends Audit {
     private UUID id;
     
     @NotNull
-    @Column(name = "company_id", length = 3)
-    private String companyId;
+    @Column(name = "empresa_id", length = 3)
+    private String empresaId;
     
     @NotNull
-    @Column(name = "period_star", length = 6)
-    private String periodStar;
+    @Column(name = "periodo_star", length = 6)
+    private String periodoStar;
     
     @NotNull
-    @Column(name = "energy_source_id")
-    private Integer energySourceId;
+    @Column(name = "incidencia_id")
+    private Integer incidenciaId;
     
     @NotNull
-    @Column(name = "energy_source_type_id")
-    private Integer energySourceTypeId;
+    @Column(name = "fuente_energia_red_id")
+    private Integer fuenteEnergiaRedId;
     
-    @NotNull
-    @Column(name = "source_name", length = 100)
-    private String sourceName;
+    @Column(name = "nodo_incidencia_id")
+    private Integer nodoIncidenciaId;
     
-    @Column(name = "description", length = 200)
-    private String description;
+    @Column(name = "tipo_fuente_id")
+    private Integer tipoFuenteId;
     
-    @Column(name = "coordinates_x")
-    private Double coordinatesX;
+    @Column(name = "potencia_disponible")
+    private Double potenciaDisponible;
     
-    @Column(name = "coordinates_y")
-    private Double coordinatesY;
+    @Column(name = "tension_nominal")
+    private Double tensionNominal;
 }

@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Entity representing a description of an event
+ * Entidad que representa la descripción de un evento
  */
 @Getter
 @Setter
@@ -26,7 +26,6 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "DESCRIPCION_EVENTO")
-//@Table(name = "EVENT_DESCRIPTION")
 public class EventDescription extends Audit {
     
     @Id
@@ -35,17 +34,27 @@ public class EventDescription extends Audit {
     private UUID id;
     
     @NotNull
-    @Column(name = "company_id", length = 3)
-    private String companyId;
+    @Column(name = "empresa_id", length = 3)
+    private String empresaId;
     
     @NotNull
-    @Column(name = "period_star", length = 6)
-    private String periodStar;
+    @Column(name = "periodo_star", length = 6)
+    private String periodoStar;
     
     @NotNull
-    @Column(name = "event_id", length = 18)
-    private String eventId;
+    @Column(name = "incidencia_id")
+    private Integer incidenciaId;
     
-    @Column(name = "description", length = 200)
-    private String description;
+    @NotNull
+    @Column(name = "eventored_id")
+    private Integer eventoredId;
+    
+    @Column(name = "descripcion_evento", length = 1000)
+    private String descripcionEvento;
+    
+    @Column(name = "categoria_evento_id")
+    private Integer categoriaEventoId;
+    
+    @Column(name = "severidad_evento_id")
+    private Integer severidadEventoId;
 }

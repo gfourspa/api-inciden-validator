@@ -1,5 +1,6 @@
 package com.gfour.api.dto;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ProcessingSummaryDTO {
         
         public long getProcessingTimeMillis() {
             if (endTime != null && startTime != null) {
-                return java.time.Duration.between(startTime, endTime).toMillis();
+                return Duration.between(startTime, endTime).toMillis();
             }
             return 0;
         }

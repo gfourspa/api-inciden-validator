@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 public class Constants {
 
     public static final String TIME_ZONE = "America/santiago";
-    public static final String DELIMITER = ";";
+    public static final String DELIMITER = ",";
     
 }

@@ -24,11 +24,11 @@ import lombok.Setter;
 public abstract class Audit {
 
     @CreatedBy
-    @Column(name = "created_by", nullable = false, updatable = false)
+    @Column(name = "created_by", nullable = true, updatable = false)
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = true, updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedBy

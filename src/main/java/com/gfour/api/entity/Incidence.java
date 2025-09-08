@@ -1,6 +1,5 @@
 package com.gfour.api.entity;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -8,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Entidad que representa una incidencia en el sistema eléctrico
+ */
 @Getter
 @Setter
 @ToString
@@ -23,30 +26,40 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "INCIDENCIA")
-//@Table(name = "INCIDENCE")
-public class Incidence extends Audit{
+public class Incidence extends Audit {
     
     @Id
     @GeneratedValue(generator = "uuid2")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     
-    @Column(name = "incidence_d")
-    private String incidenceId;
+    @NotNull
+    @Column(name = "empresa_id", length = 3)
+    private String empresaId;
     
-    @Column(name = "empresa_id")
-    private String companyId;
+    @NotNull
+    @Column(name = "periodo_star", length = 6)
+    private String periodoStar;
     
-    @Column(name = "periodo_star")
-    private String period;
+    @NotNull
+    @Column(name = "incidencia_id")
+    private Integer incidenciaId;
     
-    @Column(name = "referencia_cliente")
-    private String customerReference;
+    @Column(name = "fecha_incidencia")
+    private String fechaIncidencia;
     
-    @Column(name = "fecha_inicio")
-    private LocalDateTime startDate;
+    @Column(name = "tipo_incidencia_id")
+    private Integer tipoIncidenciaId;
     
-    @Column(name = "fecha_fin")
-    private LocalDateTime endDate;
+    @Column(name = "origen_incidencia_id")
+    private Integer origenIncidenciaId;
     
+    @Column(name = "causa_incidencia_id")
+    private Integer causaIncidenciaId;
+    
+    @Column(name = "estado_incidencia_id")
+    private Integer estadoIncidenciaId;
+    
+    @Column(name = "descripcion_incidencia", length = 500)
+    private String descripcionIncidencia;
 }

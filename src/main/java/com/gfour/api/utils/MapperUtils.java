@@ -1,9 +1,6 @@
 package com.gfour.api.utils;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 /**
@@ -14,80 +11,43 @@ public class MapperUtils {
     private MapperUtils() {
         // Private constructor to prevent instantiation
     }
-    
-    /**
-     * Get a string value from the values array
-     * @param values The values array
-     * @param columnMap The column map
-     * @param columnName The column name
-     * @return The string value
-     */
-    public static String getString(String[] values, Map<String, Integer> columnMap, String columnName) {
-        Integer index = columnMap.get(columnName.toLowerCase());
-        if (index == null || index >= values.length) {
-            return null;
-        }
-        String value = values[index].trim();
-        return value.isEmpty() ? null : value;
-    }
-    
-    /**
-     * Get an integer value from the values array
-     * @param values The values array
-     * @param columnMap The column map
-     * @param columnName The column name
-     * @return The integer value
-     */
-    public static Integer getInteger(String[] values, Map<String, Integer> columnMap, String columnName) {
-        String value = getString(values, columnMap, columnName);
-        return value == null ? null : Integer.parseInt(value);
-    }
-    
-    /**
-     * Get a boolean value from the values array
-     * @param values The values array
-     * @param columnMap The column map
-     * @param columnName The column name
-     * @return The boolean value
-     */
-    public static Boolean getBoolean(String[] values, Map<String, Integer> columnMap, String columnName) {
-        String value = getString(values, columnMap, columnName);
-        if (value == null) return null;
-        return "1".equals(value) || "true".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value);
-    }
-    
-    /**
-     * Get a big decimal value from the values array
-     * @param values The values array
-     * @param columnMap The column map
-     * @param columnName The column name
-     * @return The big decimal value
-     */
-    public static BigDecimal getBigDecimal(String[] values, Map<String, Integer> columnMap, String columnName) {
-        String value = getString(values, columnMap, columnName);
-        return value == null ? null : new BigDecimal(value.replace(",", "."));
+
+    public static String getValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        Integer index = columnMap.get(columnName);
+        return (index != null && index < values.length && !values[index].trim().isEmpty()) 
+            ? values[index].trim() : null;
     }
 
-    public static Double getDouble(String[] values, Map<String, Integer> columnMap, String columnName) {
-        String value = getString(values, columnMap, columnName);
-        return value == null ? null : Double.parseDouble(value.replace(",", "."));
+    public static Integer getIntegerValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getValue(values, columnMap, columnName);
+        return (value != null) ? Integer.valueOf(value) : null;
     }
-    
-    /**
-     * Get a LocalDateTime value from the values array
-     * @param values The values array
-     * @param columnMap The column map
-     * @param columnName The column name
-     * @param format The date format
-     * @return The LocalDateTime value
-     */
-    public static LocalDateTime getLocalDateTime(String[] values, Map<String, Integer> columnMap, String columnName, String format) {
-        String value = getString(values, columnMap, columnName);
-        if (value == null) return null;
-        try {
-            return LocalDateTime.parse(value, DateTimeFormatter.ofPattern(format));
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid date format for column " + columnName + ": " + value);
+
+    public static Long getLongValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getValue(values, columnMap, columnName);
+        return (value != null) ? Long.valueOf(value) : null;
+    }
+
+    public static Double getDoubleValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getValue(values, columnMap, columnName);
+        return (value != null) ? Double.valueOf(value) : null;
+    }
+
+    public static BigDecimal getBigDecimalValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getValue(values, columnMap, columnName);
+        return (value != null) ? new BigDecimal(value) : null;
+    }
+
+    public static Boolean getBooleanValue(String[] values, Map<String, Integer> columnMap, String columnName) {
+        String value = getValue(values, columnMap, columnName);
+        if (value == null) {
+            return Boolean.FALSE;
         }
+        
+        String lowerValue = value.toLowerCase();
+        return "true".equals(lowerValue) || "1".equals(lowerValue) || "s".equals(lowerValue) || 
+               "si".equals(lowerValue) || "y".equals(lowerValue) || "yes".equals(lowerValue);
     }
+
 }
+    
