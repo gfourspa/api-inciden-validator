@@ -55,10 +55,11 @@ import com.gfour.api.utils.Constants;
 @Service
 public class FileProcessingServiceImpl implements FileProcessingService {
     private static final Logger logger = LoggerFactory.getLogger(FileProcessingServiceImpl.class);
-    
+
     private final EntityMapperFactory mapperFactory;
     private final Map<String, JpaRepository<?, ?>> repositories = new HashMap<>();
-    
+    private final Map<String, String> spanishToEnglishMapping = new HashMap<>();
+
     @Autowired
     public FileProcessingServiceImpl(
             EntityMapperFactory mapperFactory,
@@ -87,10 +88,11 @@ public class FileProcessingServiceImpl implements FileProcessingService {
             TransformerInterruptionRepository transformerInterruptionRepository,
             TransformerTopologyRepository transformerTopologyRepository,
             CommuneCompanySDStateRepository communeCompanySDStateRepository) {
-        
+
         this.mapperFactory = mapperFactory;
-        
-        // Register repositories for different entity types (snake_case keys to match mapper factory)
+
+        // Register repositories for different entity types (snake_case keys to match
+        // mapper factory)
         repositories.put("affected_feeder_detail", affectedFeederRepository); // ALIMENTADOR_AFECTADO
         repositories.put("feeder_incidence", feederIncidenceRepository); // ALIMENTADOR_INCIDENCIA
         repositories.put("feeder_restoration_detail", feederRestorationRepository); // ALIMENTADOR_REPOSICION
@@ -116,48 +118,102 @@ public class FileProcessingServiceImpl implements FileProcessingService {
         repositories.put("transformer_interruption", transformerInterruptionRepository); // TRANSFORMADOR_INTERRUPCION
         repositories.put("transformer_topology", transformerTopologyRepository); // TRANSFORMADOR_TOPOLOGIA
         repositories.put("estado_comuna_empresa_sd", communeCompanySDStateRepository); // ESTADO_COMUNA_EMPRESA_SD
+
+        // Initialize Spanish to English mapping
+        initializeSpanishMapping();
     }
-    
+
+    /**
+     * Initialize mapping from Spanish table names to English entity types
+     */
+    private void initializeSpanishMapping() {
+        spanishToEnglishMapping.put("alimentador_afectado", "affected_feeder_detail");
+        spanishToEnglishMapping.put("alimentador_incidencia", "feeder_incidence");
+        spanishToEnglishMapping.put("alimentador_reposicion", "feeder_restoration_detail");
+        spanishToEnglishMapping.put("aviso", "notice_detail");
+        spanishToEnglishMapping.put("bloque_reposicion", "restoration_block");
+        spanishToEnglishMapping.put("conexion_nodo_incidencia", "incidence_node_connection");
+        spanishToEnglishMapping.put("descripcion_evento", "event_description");
+        spanishToEnglishMapping.put("equipo_topologia", "equipment_topology");
+        spanishToEnglishMapping.put("evento_red", "network_event");
+        spanishToEnglishMapping.put("fuente_energia_red", "network_energy_source");
+        spanishToEnglishMapping.put("incidencia", "incidence");
+        spanishToEnglishMapping.put("interrupcion", "interruption");
+        spanishToEnglishMapping.put("interrupcion_punto_consumo", "consumption_point_interruption");
+        spanishToEnglishMapping.put("nodo_incidencia", "node_incidence");
+        spanishToEnglishMapping.put("nodo_incidencia_cabecera", "incidence_node_header");
+        spanishToEnglishMapping.put("nodo_incidencia_externo", "external_incidence_node");
+        spanishToEnglishMapping.put("puente", "bridge");
+        spanishToEnglishMapping.put("punto_consumo_topologia", "consumption_point_topology");
+        spanishToEnglishMapping.put("punto_derivacion_incidencia", "incidence_derivation_point");
+        spanishToEnglishMapping.put("punto_falla", "failure_point");
+        spanishToEnglishMapping.put("punto_suministro_incidencia", "incidence_supply_point");
+        spanishToEnglishMapping.put("subestacion_incidencia", "incidence_substation");
+        spanishToEnglishMapping.put("transformador_interrupcion", "transformer_interruption");
+        spanishToEnglishMapping.put("transformador_topologia", "transformer_topology");
+        spanishToEnglishMapping.put("estado_comuna_empresa_sd", "estado_comuna_empresa_sd");
+    }
+
+    /**
+     * Convert Spanish entity type to English if needed
+     */
+    private String normalizeEntityType(String entityType) {
+        String lowerType = entityType.toLowerCase();
+
+        if (spanishToEnglishMapping.containsKey(lowerType)) {
+            return spanishToEnglishMapping.get(lowerType);
+        }
+
+        if (repositories.containsKey(lowerType)) {
+            return lowerType;
+        }
+
+        return lowerType;
+    }
+
     @Override
     public List<String> getSupportedEntityTypes() {
-        return new ArrayList<>(repositories.keySet());
+        List<String> allTypes = new ArrayList<>();
+        allTypes.addAll(repositories.keySet());
+        allTypes.addAll(spanishToEnglishMapping.keySet());
+        return allTypes;
     }
-    
+
     @Override
     @Transactional
     public ProcessingSummaryDTO processFile(MultipartFile file, String entityType) {
         validateInputs(file, entityType);
-        
+
         String filename = file.getOriginalFilename();
         ProcessingSummaryDTO summary = new ProcessingSummaryDTO();
         summary.setEntityType(entityType);
         summary.setFileName(filename);
         summary.setStartTime(LocalDateTime.now());
-        
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            // Get the appropriate mapper and repository
-            EntityMapper<?> mapper = mapperFactory.getMapper(entityType);
-            JpaRepository<Object, ?> repository = getRepositoryForType(entityType);
-            
-            // Process the file
+            String normalizedType = normalizeEntityType(entityType);
+
+            EntityMapper<?> mapper = mapperFactory.getMapper(normalizedType);
+            JpaRepository<Object, ?> repository = getRepositoryForType(normalizedType);
+
+            if (mapper == null || repository == null) {
+                throw new IllegalArgumentException("No mapper or repository found for entity type: " + entityType);
+            }
+
             List<Object> entities = processFileContent(reader, mapper, summary);
-            
-            // Save the entities
+
             saveEntitiesWithErrorHandling(entities, repository, filename, summary);
-            
+
             summary.setEndTime(LocalDateTime.now());
             return summary;
-            
+
         } catch (IOException e) {
             logger.error("Failed to process file {}: {}", filename, e.getMessage(), e);
             throw new FileProcessingException("Failed to process file: " + filename, e);
         }
     }
-    
-    /**
-     * Save entities with error handling
-     */
-    private void saveEntitiesWithErrorHandling(List<Object> entities, JpaRepository<Object, ?> repository, 
+
+    private void saveEntitiesWithErrorHandling(List<Object> entities, JpaRepository<Object, ?> repository,
             String filename, ProcessingSummaryDTO summary) {
         try {
             saveEntities(entities, repository);
@@ -167,15 +223,12 @@ public class FileProcessingServiceImpl implements FileProcessingService {
             summary.addError("Database error: " + e.getMessage());
         }
     }
-    
-    /**
-     * Validate input parameters
-     */
+
     private void validateInputs(MultipartFile file, String entityType) {
         if (file == null || file.isEmpty()) {
             throw new IllegalArgumentException("File is empty or null");
         }
-        
+
         String originalFilename = file.getOriginalFilename();
         if (originalFilename != null && !originalFilename.isEmpty()) {
             String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1).toLowerCase();
@@ -185,30 +238,29 @@ public class FileProcessingServiceImpl implements FileProcessingService {
         } else {
             throw new IllegalArgumentException("Invalid filename");
         }
-        
-        if (!repositories.containsKey(entityType.toLowerCase())) {
-            throw new IllegalArgumentException("Unsupported entity type: " + entityType);
+
+        String normalizedType = normalizeEntityType(entityType);
+        if (!repositories.containsKey(normalizedType)) {
+            throw new IllegalArgumentException("Unsupported entity type: " + entityType +
+                    ". Supported types: " + String.join(", ", getSupportedEntityTypes()));
         }
     }
+
     
-    /**
-     * Get repository for the specified entity type
-     */
     @SuppressWarnings("unchecked")
     private JpaRepository<Object, ?> getRepositoryForType(String entityType) {
-        return (JpaRepository<Object, ?>) repositories.get(entityType.toLowerCase());
+        String normalizedType = normalizeEntityType(entityType);
+        return (JpaRepository<Object, ?>) repositories.get(normalizedType);
     }
-    
-    /**
-     * Process the file content and map to entities
-     */
-    private <T> List<Object> processFileContent(BufferedReader reader, EntityMapper<T> mapper, 
+
+
+    private <T> List<Object> processFileContent(BufferedReader reader, EntityMapper<T> mapper,
             ProcessingSummaryDTO summary) throws IOException {
         List<Object> entities = new ArrayList<>();
         Map<String, Integer> columnMap = new HashMap<>();
         String line;
         int lineNumber = 0;
-        
+
         // Read header line to determine column mapping
         String headerLine = reader.readLine();
         if (headerLine != null) {
@@ -218,7 +270,7 @@ public class FileProcessingServiceImpl implements FileProcessingService {
             }
             lineNumber++;
         }
-        
+
         // Process data lines
         while ((line = reader.readLine()) != null) {
             lineNumber++;
@@ -237,13 +289,10 @@ public class FileProcessingServiceImpl implements FileProcessingService {
                 summary.addError(String.format("Line %d: Unexpected error - %s", lineNumber, e.getMessage()));
             }
         }
-        
+
         return entities;
     }
-    
-    /**
-     * Save entities using the repository
-     */
+
     private void saveEntities(List<Object> entities, JpaRepository<Object, ?> repository) {
         repository.saveAll(entities);
     }

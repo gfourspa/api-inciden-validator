@@ -41,6 +41,9 @@ public class FailurePoint extends Audit {
     @Column(name = "periodo_star", length = 6)
     private String periodoStar;
     
+    @Column(name = "incidencia_id")
+    private Integer incidenciaId;
+    
     @NotNull
     @Column(name = "interrupcion_id", length = 18)
     private String interrupcionId;

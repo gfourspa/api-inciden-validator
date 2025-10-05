@@ -57,4 +57,7 @@ public class TransformerTopology extends Audit {
     
     @Column(name = "participacion_transformador")
     private Double participacionTransformador;
+    
+    @Column(name = "zona_codigo", length = 6)
+    private String zonaCodigo;
 }

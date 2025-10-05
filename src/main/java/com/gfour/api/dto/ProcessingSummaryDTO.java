@@ -14,28 +14,30 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProcessingSummaryDTO {
-        private String entityType;
-        private String fileName;
-        private LocalDateTime startTime;
-        private LocalDateTime endTime;
-        private int successCount;
-        private int errorCount;
-        private List<String> errors;
-        
-        public void addError(String error) { this.errors.add(error); }
-        
-        public long getProcessingTimeMillis() {
-            if (endTime != null && startTime != null) {
-                return Duration.between(startTime, endTime).toMillis();
-            }
-            return 0;
-        }
+    private String entityType;
+    private String fileName;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private int successCount;
+    private int errorCount;
+    private List<String> errors;
 
-        public int incrementSuccessCount() {
-            return ++successCount;
-        }
-
-        public int incrementErrorCount() {
-            return ++errorCount;
-        }
+    public void addError(String error) {
+        this.errors.add(error);
     }
+
+    public long getProcessingTimeMillis() {
+        if (endTime != null && startTime != null) {
+            return Duration.between(startTime, endTime).toMillis();
+        }
+        return 0;
+    }
+
+    public int incrementSuccessCount() {
+        return ++successCount;
+    }
+
+    public int incrementErrorCount() {
+        return ++errorCount;
+    }
+}

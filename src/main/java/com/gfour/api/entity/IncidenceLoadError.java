@@ -1,7 +1,11 @@
 package com.gfour.api.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,14 +26,16 @@ import lombok.Setter;
 @Builder
 public class IncidenceLoadError extends Audit {
 
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
     @Column(name = "error", length = 10)
     private String error;
 
     @Column(name = "tabla", length = 255)
     private String tabla;
-
-    @Column(name = "id", length = 250)
-    private String id;
 
     @Column(name = "incidencia", length = 50)
     private String incidencia;
